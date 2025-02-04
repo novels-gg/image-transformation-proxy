@@ -3,7 +3,6 @@ import Express from 'express'
 import { restrictMethod } from './middlewares'
 import { ImageService } from './service'
 import {
-    ASSETS_PATH,
     ensureDirectoryExists,
     hash,
     paramObjectToString,
@@ -14,7 +13,7 @@ import {
 const app = Express()
 const imageService = new ImageService()
 
-Promise.all([ensureDirectoryExists(ASSETS_PATH), ensureDirectoryExists(TRANSFORMATIONS_PATH)])
+await ensureDirectoryExists(TRANSFORMATIONS_PATH)
 
 app.use(cors({ origin: '*' }))
 app.use(restrictMethod('GET'))
@@ -86,8 +85,6 @@ app.get('*', async (req, res) => {
     }
 })
 
-const PORT = parseInt(process.env.PORT || '3000', 10)
-
-app.listen(PORT, '0.0.0.0', () => {
-    console.log(`The server is listening to connections in port ${PORT}`)
+app.listen(3000, '0.0.0.0', () => {
+    console.log('The server is listening to connections in port 3000')
 })

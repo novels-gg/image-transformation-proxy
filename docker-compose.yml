@@ -1,0 +1,26 @@
+services:
+    app:
+        build:
+            dockerfile: Dockerfile
+            context: .
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+        volumes:
+            - './storage/assets:/app/storage/assets:ro'
+            - 'transformations:/app/storage/transformations:rw'
+        networks:
+            - traefik
+        labels:
+            - traefik.enable=true
+            - traefik.http.routers.novels-gg-image-transformer.rule=Host(`images.novels-gg.localhost`)
+            - traefik.http.routers.novels-gg-image-transformer.entrypoints=web
+            - traefik.http.routers.novels-gg-image-transformer.service=novels-gg-image-transformer-service
+            - traefik.http.services.novels-gg-image-transformer-service.loadbalancer.server.port=3000
+
+networks:
+    traefik:
+        external: true
+
+volumes:
+    transformations:
+        driver: local
