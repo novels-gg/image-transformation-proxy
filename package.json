@@ -1,0 +1,28 @@
+{
+    "private": true,
+    "name": "@novels-gg/local-image-optimizer",
+    "module": "src/main.ts",
+    "type": "module",
+    "scripts": {
+        "start": "bun build/main.js",
+        "build": "bun build src/main.ts --outdir build --target=bun",
+        "dev": "bun --watch src/main.ts",
+        "format": "prettier --write ."
+    },
+    "devDependencies": {
+        "@types/bun": "latest",
+        "@types/cors": "^2.8.17",
+        "@types/express": "^5.0.0",
+        "prettier": "^3.4.2",
+        "prettier-plugin-organize-imports": "^4.1.0"
+    },
+    "peerDependencies": {
+        "typescript": "^5.0.0"
+    },
+    "dependencies": {
+        "cors": "^2.8.5",
+        "express": "^4.21.2",
+        "sharp": "^0.33.5",
+        "zod": "^3.24.1"
+    }
+}
